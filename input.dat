@@ -1,0 +1,23 @@
+printing 1
+
+# If seed is not given a different random # number is choosen at each run
+# seed 10
+
+#.... Elementary barriers (in eV)
+#     1 - 1->2 Right
+#     2 - 1->2 Left
+#     3 - 2->1 Right
+#     4 - 2->1 Left
+barriers 0.23 0.23 0.1 0.1 
+
+#.... Prefactor (in ps^-1) 
+#     1 - 1->2 Right  | The TS are different in one direction
+#     2 - 1->2 Left   | and in the ohter
+#     3 - 2->1 Right
+#     4 - 2->1 Left
+prefactors  1.01 1 1 1
+
+# Temperature (in K)
+temperature 300.0
+
+number_of_kmc_steps 10000000
