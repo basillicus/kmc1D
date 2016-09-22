@@ -10,6 +10,32 @@ subroutine all_moves()
       integer :: k
   m=0
 
+  ! if (current_state == 1) then 
+  !     ! Move to the right
+  !     call fill_in (m,1,1,elem_barrier(1),rat(1),'diffus')
+  !     ! Move to the left
+  !     call fill_in (m,1,-1,elem_barrier(2),rat(2),'diffus')
+  ! else if (current_state == 2) then 
+  !     ! Move to the right
+  !     call fill_in (m,2,1,elem_barrier(3),rat(3),'diffus')
+  !     ! Move to the left
+  !     call fill_in (m,2,-1,elem_barrier(4),rat(4),'diffus')
+  ! end if
+
+
+  ! if (current_state == 1) then 
+  !     ! Move to the right
+  !     call fill_in (m,1,1,elem_barrier(1)-(alpha*distance),rat(1),'diffus')
+  !     ! Move to the left
+  !     call fill_in (m,1,-1,elem_barrier(2)-(alpha*distance),rat(2),'diffus')
+  ! else if (current_state == 2) then 
+  !     ! Move to the right
+  !     call fill_in (m,2,1,elem_barrier(3)-(alpha/2*distance),rat(3),'diffus')
+  !     ! Move to the left
+  !     call fill_in (m,2,-1,elem_barrier(4)-(alpha/2*distance),rat(4),'diffus')
+  ! end if
+
+
   if (current_state == 1) then 
       ! Move to the right
       call fill_in (m,1,1,elem_barrier(1),rat(1),'diffus')
@@ -32,8 +58,8 @@ end subroutine all_moves
 
 subroutine which_move(m)
 
-  !.........................................................................
-! From all the moves possible it take one using KMC rules:
+!.........................................................................
+! From all the posible moves it takes one using KMC rules:
 ! m    - move number to be taken
 ! time - time for that move to take place (in units of the rates)
 !.........................................................................
@@ -71,24 +97,45 @@ subroutine perform_move(m,kmc)
     
     select case (type)
 !
+! No se si hice esto para Zaragoza y permitia que avanzara tanto en el estado 1 
+! como en el 2 Pero creo que solo debe avanzar cuando esta en el estado 2 y si
+! la direccion es la misma que la del paso anterior.
+
+    ! case ('diffus')
+    !     if (i==1) then
+    !         ! Move to the next state
+    !         current_state = 2
+    !         distance = distance + j
+    !         ! previous_direction = j
+    !     else if (i == 2) then
+    !         current_state = 1
+    !         ! if (j == previous_direction ) then 
+    !             distance = distance + j
+    !             ! previous_direction = 0 
+    !         ! end if
+    !     end if 
+
+    ! La molecula solo avanza cuando se mueve desde el estado 2 y el sentido el movimiento es 
+    ! el mismo que el sentido de movimiento del paso anterior
     case ('diffus')
         if (i==1) then
             ! Move to the next state
             current_state = 2
-            distance = distance + j
-            ! previous_direction = j
+            ! distance = distance + j
+            previous_direction = j
         else if (i == 2) then
             current_state = 1
-            ! if (j == previous_direction ) then 
+            if (j == previous_direction ) then 
                 distance = distance + j
-                ! previous_direction = 0 
-            ! end if
+            !    previous_direction = 0 !> No es necesario reiniciar este valor
+            end if
         end if 
     end select
 end subroutine perform_move
 
 
 subroutine fill_in(m,i,j,barrier,rate,typ)
+! subroutine fill_in(m,i,j,barrier,prefactor,typ)
 !..............................................................................................
 ! fills in the array move for each possible step m with all necessary attributes
 !..............................................................................................
@@ -96,11 +143,17 @@ subroutine fill_in(m,i,j,barrier,rate,typ)
    integer :: i  !> Initial state
    integer :: j  !> Direction of the move (1: right; -1: left)
 
-   real*8 barrier,rate
+   real*8 barrier,rate,prefactor
    character*6 typ
 
    m=m+1
    if(m.gt.max_moves) stop 'max # of moves reached'
+
+   ! ! Compute the rates on the fly (due to alpha) before fill up the moves matrix (less efficient than 
+   ! ! computing the rates at the very begining only once)
+   ! pref= +1.0 * log(prefactor)
+   ! rate=exp(-beta*barrier+pref)
+
    movement(m)=move_attr(i,j,barrier,rate,typ)
    ! if(testing) write(*,'(i5,x,a10,x,3(i5,x),2(i3,x),f10.5,x,e12.6)') m,typ,config,i,i1,j,0,barrier,rate
 end subroutine fill_in

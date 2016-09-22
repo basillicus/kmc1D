@@ -32,7 +32,7 @@ FCOMPL  = gfortran
 .c.o:
 	$(CCOMPL) -c $(CFLAGC) $(profile) $<
 
-OBJECTS =  tools_strings.o param.o moves.o move.o main.o random.o 
+OBJECTS =  tools_strings.o param.o move.o moves.o main.o random.o 
 
 INLINE  =
 

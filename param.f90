@@ -27,8 +27,9 @@ module param
     integer   :: LinEnd(100), LinPos(100), NumLin, iErr
 
 !... Statistics variables
-    logical   :: do_statistics   ! If perform statistics
-    integer   :: freq_statistics ! Perform statistics every this steps
+    logical   :: do_statistics   !> If to perform statistics
+    integer   :: freq_statistics !> Perform statistics every this steps
+    integer   :: freq_writing, writing_state=0    !> Write KMC state every freq_writing steps
 
 !... elementary barriers (in eV) and inverse temperature (in 1/eV), temperature (K)
     real*8  :: elem_barrier(total_states*2)
@@ -36,6 +37,7 @@ module param
     real*8 rat(10)
     real*8  :: temperature
     real*8  :: beta
+    real*8  :: alpha=0  !> Dissipation factor
 
     real*8,parameter :: Boltzm = 8.617343e-5  ! in eV/K
 
@@ -98,6 +100,15 @@ module param
     if(NumLin.lt.2) go to 10
     read(Line(LinPos(2):LinEnd(2)),*,err=10) temperature
     beta=1.0/(Boltzm*temperature)
+!
+!_________________ alpha 
+!
+    call find_string('alpha',5,Line,1,.true.,iErr)
+    if(iErr.eq.0) then
+       call CutStr(Line,NumLin,LinPos,LinEnd,0,0,iErr)
+       if(NumLin.lt.2) go to 10
+       read(Line(LinPos(2):LinEnd(2)),*,err=10) alpha
+    end if
 ! !
 ! !________ prefix to the rate, i.e. the exp prefactor to the rate:
 ! !         - in inverse ps (1 ps=10^{-12} s)
@@ -107,17 +118,24 @@ module param
 !
     do i=1,4
        pref= +1.0 * log(prefactors(i))
-       rat(i)=exp(-beta*elem_barrier(i)+pref)
+       if ( i == 2 ) then ! i == 2 Pushing diffusion to the right
+           rat(i)=exp(-beta*(elem_barrier(i)+alpha)+pref)
+       else 
+           rat(i)=exp(-beta*elem_barrier(i)+pref)
+       end if
     end do
+    
     ! rat(8)=depos_rate   ;    elem_barrier(8)=0.0d0
-    write(9,'(/a)')'============|  Barriers (in Ev)  and Rates (in ps^-1) |============'
+    write(9,'(/a)')'============|  Barriers (in Ev), Rates (in ps^-1) and Prefactors |============'
     write(9,'(a,f10.3,a)') '   Temperature = ',temperature,' K'
-    write(9,'(a,f10.5,x,e12.6)') ' 1. State 1 to the right:',elem_barrier(1),rat(1)
-    write(9,'(a,f10.5,x,e12.6)') ' 2. State 1 to the left :',elem_barrier(2),rat(2)
-    write(9,'(a,f10.5,x,e12.6)') ' 3. State 2 to the right:',elem_barrier(3),rat(3)
-    write(9,'(a,f10.5,x,e12.6)') ' 4. State 2 to the left :',elem_barrier(4),rat(4)
-    write(*,'(/a)')'============|  Barriers (in Ev)  and Rates (in ps^-1) |============'
+    write(9,'(a,f8.5,a)') '   alpha = ',alpha, ' eV'
+    write(9,'(a,f10.5,x,e12.6,x,e12.6)') ' 1. State 1 to the right:',elem_barrier(1),rat(1), prefactors(1)
+    write(9,'(a,f10.5,x,e12.6,x,e12.6)') ' 2. State 1 to the left :',elem_barrier(2),rat(2), prefactors(2)
+    write(9,'(a,f10.5,x,e12.6,x,e12.6)') ' 3. State 2 to the right:',elem_barrier(3),rat(3), prefactors(3)
+    write(9,'(a,f10.5,x,e12.6,x,e12.6)') ' 4. State 2 to the left :',elem_barrier(4),rat(4), prefactors(4)
+    write(*,'(/a)')'============|  Barriers (in Ev), Rates (in ps^-1) and Prefactors |============'
     write(*,'(a,f10.3,a)') '   Temperature = ',temperature,' K'
+    write(*,'(a,f8.5,a)') '   alpha = ',alpha, ' eV'
     write(*,'(a,f10.5,x,e12.6,x,e12.6)') ' 1. State 1 to the right:',elem_barrier(1),rat(1), prefactors(1)
     write(*,'(a,f10.5,x,e12.6,x,e12.6)') ' 2. State 1 to the left :',elem_barrier(2),rat(2), prefactors(2)
     write(*,'(a,f10.5,x,e12.6,x,e12.6)') ' 3. State 2 to the right:',elem_barrier(3),rat(3), prefactors(3)
@@ -152,6 +170,15 @@ module param
        read(Line(LinPos(2):LinEnd(2)),*,err=10) freq_statistics
     end if
     write(9,'(a,i7,a)')'... Heavy statistics perform every  = ',freq_statistics, ' kmc steps'
+    
+    freq_writing = 10000
+    call find_string('freq_writing',12,Line,1,.true.,iErr)
+    if(iErr.eq.0) then
+       call CutStr(Line,NumLin,LinPos,LinEnd,0,0,iErr)
+       if(NumLin.lt.2) go to 10
+       read(Line(LinPos(2):LinEnd(2)),*,err=10) freq_writing
+    end if
+    write(9,'(a,i7,a)')'... KMC state will be written  every  = ',freq_writing, ' kmc steps'
 !
 !___________ Choose fixed or random seed for random number generation
     seed=0
