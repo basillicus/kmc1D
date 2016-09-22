@@ -1,5 +1,5 @@
 GFORTRAN module version '10' created from moves.f90
-MD5:36c785406fd04e525a818c14cec9dacf -- If you edit this, you'll get what you deserve.
+MD5:5c80faf52e033a19b1fdf94d126d8fc7 -- If you edit this, you'll get what you deserve.
 
 (() () () () () () () () () () () () () () () () () () () () () () ()
 () () () ())
@@ -106,78 +106,86 @@ EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
 INTEGER 4 0 0 0 INTEGER ()) 0 '100')) 0 () () () 0 0)
 64 'luo' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-65 'm' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+65 'luo2' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-66 'max_moves' 'move' '' 1 ((PARAMETER UNKNOWN-INTENT UNKNOWN-PROC
+66 'm' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
+67 'max_moves' 'move' '' 1 ((PARAMETER UNKNOWN-INTENT UNKNOWN-PROC
 UNKNOWN IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () (
 CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2') () 0 () () () 0 0)
-67 'move' 'move' '' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+68 'move' 'move' '' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 () () () 0 0)
-68 'move_attr' 'move' '' 1 ((PROCEDURE UNKNOWN-INTENT UNKNOWN-PROC DECL
-UNKNOWN 0 0 FUNCTION GENERIC) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 68
+69 'move_attr' 'move' '' 1 ((PROCEDURE UNKNOWN-INTENT UNKNOWN-PROC DECL
+UNKNOWN 0 0 FUNCTION GENERIC) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 69
 () () () 0 0)
-69 'movement' 'move' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+70 'movement' 'move' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 IMPLICIT-SAVE 0 0 ALLOCATABLE DIMENSION) (DERIVED 2 0 0 0 DERIVED ()) 0
 0 () (1 0 DEFERRED () ()) 0 () () () 0 0)
-70 'moves' 'moves' '' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+71 'moves' 'moves' '' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 () () () 0 0)
-71 'ncomm' 'strings' '' 1 ((PARAMETER UNKNOWN-INTENT UNKNOWN-PROC
+72 'ncomm' 'strings' '' 1 ((PARAMETER UNKNOWN-INTENT UNKNOWN-PROC
 UNKNOWN IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () (
 CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '3') () 0 () () () 0 0)
-72 'no_kmc' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+73 'next_time' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN IMPLICIT-SAVE 0 0) (REAL 8 0 0 0 REAL ()) 0 0 () () 0 () () () 0
+0)
+74 'no_kmc' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-73 'no_moves' 'move' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+75 'no_moves' 'move' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-74 'numlin' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+76 'numlin' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-75 'param' 'param' '' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+77 'param' 'param' '' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 () () () 0 0)
-76 'perform_move' 'moves' '' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC
-DECL UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 77 0 (78 79) ()
+78 'perform_move' 'moves' '' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC
+DECL UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 79 0 (80 81) ()
 0 () () () 0 0)
-80 'pref' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+82 'pref' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 IMPLICIT-SAVE 0 0) (REAL 8 0 0 0 REAL ()) 0 0 () () 0 () () () 0 0)
-81 'prefactors' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
+83 'prefactors' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
 UNKNOWN IMPLICIT-SAVE 0 0 DIMENSION) (REAL 8 0 0 0 REAL ()) 0 0 () (1 0
 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
 INTEGER 4 0 0 0 INTEGER ()) 0 '4')) 0 () () () 0 0)
-82 'previous_direction' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT
+84 'previous_direction' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0
 () () 0 () () () 0 0)
-83 'rat' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+85 'rat' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN 0 0 DIMENSION) (REAL 8 0 0 0 REAL ()) 0 0 () (1 0 EXPLICIT (
 CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0
 INTEGER ()) 0 '10')) 0 () () () 0 0)
-84 'read_input' 'param' '' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC DECL
+86 'read_input' 'param' '' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC DECL
 UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 () () ()
 0 0)
-85 'real_seed' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
+87 'real_seed' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
 UNKNOWN IMPLICIT-SAVE 0 0) (REAL 8 0 0 0 REAL ()) 0 0 () () 0 () () () 0
 0)
-86 'seed' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+88 'seed' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-87 'skipl' 'strings' '' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC DECL
-UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 88 0 (89 90) () 0 ()
+89 'skipl' 'strings' '' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC DECL
+UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 90 0 (91 92) () 0 ()
 () () 0 0)
-91 'strings' 'strings' '' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+93 'strings' 'strings' '' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 () () () 0 0)
-92 'sum_rates' 'move' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
+94 'sum_rates' 'move' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
 UNKNOWN UNKNOWN 0 0) (REAL 8 0 0 0 REAL ()) 0 0 () () 0 () () () 0 0)
-93 'temperature' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
+95 'temperature' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
 UNKNOWN IMPLICIT-SAVE 0 0) (REAL 8 0 0 0 REAL ()) 0 0 () () 0 () () () 0
 0)
-94 'time' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+96 'time' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 IMPLICIT-SAVE 0 0) (REAL 8 0 0 0 REAL ()) 0 0 () () 0 () () () 0 0)
-95 'tiny' 'param' '' 1 ((PARAMETER UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+97 'time_interval' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN IMPLICIT-SAVE 0 0) (REAL 8 0 0 0 REAL ()) 0 0 () () 0 () () () 0
+0)
+98 'tiny' 'param' '' 1 ((PARAMETER UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 IMPLICIT-SAVE 0 0) (REAL 8 0 0 0 REAL ()) 0 0 () (CONSTANT (REAL 8 0 0 0
 REAL ()) 0 '0.10c6f7a0000000@-4') () 0 () () () 0 0)
-96 'total_states' 'param' '' 1 ((PARAMETER UNKNOWN-INTENT UNKNOWN-PROC
+99 'total_states' 'param' '' 1 ((PARAMETER UNKNOWN-INTENT UNKNOWN-PROC
 UNKNOWN IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () (
 CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2') () 0 () () () 0 0)
-97 'which_move' 'moves' '' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC DECL
-UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 98 0 (99) () 0 () ()
-() 0 0)
-100 'writing_state' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
+100 'which_move' 'moves' '' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC
+DECL UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 101 0 (102) ()
+0 () () () 0 0)
+103 'writing_state' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
 UNKNOWN IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () ()
 () 0 0)
 18 'line' '' '' 17 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
@@ -245,16 +253,16 @@ UNKNOWN 0 0 DUMMY) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 UNKNOWN 0 0 DUMMY) (LOGICAL 4 0 0 0 LOGICAL ()) 0 0 () () 0 () () () 0 0)
 55 'ierr' '' '' 49 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN 0 0 DUMMY) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-78 'm' '' '' 77 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0
+80 'm' '' '' 79 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0
 0 DUMMY) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-79 'kmc' '' '' 77 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+81 'kmc' '' '' 79 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
 0 0 DUMMY) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-89 'nfil' '' '' 88 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+91 'nfil' '' '' 90 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN 0 0 DUMMY) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-90 'ierr' '' '' 88 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+92 'ierr' '' '' 90 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN 0 0 DUMMY) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-99 'm' '' '' 98 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0
-0 DUMMY) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
+102 'm' '' '' 101 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
+0 0 DUMMY) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 )
 
 ('Move_attr' 0 2 '__convert_i4_r8' 0 8 '__convert_r4_r8' 0 9 'all_moves'
@@ -263,10 +271,10 @@ UNKNOWN 0 0 DUMMY) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 'dt' 0 28 'elem_barrier' 0 29 'fill_in' 0 30 'find_2strings' 0 38
 'find_string' 0 48 'freq_statistics' 0 56 'freq_writing' 0 57 'ierr' 0
 58 'iprnt' 0 59 'kmc' 0 60 'line' 0 61 'linend' 0 62 'linpos' 0 63 'luo'
-0 64 'm' 0 65 'max_moves' 0 66 'move' 0 67 'move_attr' 0 68 'movement' 0
-69 'moves' 0 70 'ncomm' 0 71 'no_kmc' 0 72 'no_moves' 0 73 'numlin' 0 74
-'param' 0 75 'perform_move' 0 76 'pref' 0 80 'prefactors' 0 81
-'previous_direction' 0 82 'rat' 0 83 'read_input' 0 84 'real_seed' 0 85
-'seed' 0 86 'skipl' 0 87 'strings' 0 91 'sum_rates' 0 92 'temperature' 0
-93 'time' 0 94 'tiny' 0 95 'total_states' 0 96 'which_move' 0 97
-'writing_state' 0 100)
+0 64 'luo2' 0 65 'm' 0 66 'max_moves' 0 67 'move' 0 68 'move_attr' 0 69
+'movement' 0 70 'moves' 0 71 'ncomm' 0 72 'next_time' 0 73 'no_kmc' 0 74
+'no_moves' 0 75 'numlin' 0 76 'param' 0 77 'perform_move' 0 78 'pref' 0
+82 'prefactors' 0 83 'previous_direction' 0 84 'rat' 0 85 'read_input' 0
+86 'real_seed' 0 87 'seed' 0 88 'skipl' 0 89 'strings' 0 93 'sum_rates'
+0 94 'temperature' 0 95 'time' 0 96 'time_interval' 0 97 'tiny' 0 98
+'total_states' 0 99 'which_move' 0 100 'writing_state' 0 103)

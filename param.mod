@@ -1,5 +1,5 @@
 GFORTRAN module version '10' created from param.f90
-MD5:7ffa80f2ea5d289b19c8e644d4df07b5 -- If you edit this, you'll get what you deserve.
+MD5:31c39d5d74b4d7f20df20f370c9b25a2 -- If you edit this, you'll get what you deserve.
 
 (() () () () () () () () () () () () () () () () () () () () () () ()
 () () () ())
@@ -88,55 +88,63 @@ EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
 INTEGER 4 0 0 0 INTEGER ()) 0 '100')) 0 () () () 0 0)
 49 'luo' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-50 'm' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+50 'luo2' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-51 'ncomm' 'strings' '' 1 ((PARAMETER UNKNOWN-INTENT UNKNOWN-PROC
+51 'm' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
+52 'ncomm' 'strings' '' 1 ((PARAMETER UNKNOWN-INTENT UNKNOWN-PROC
 UNKNOWN IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () (
 CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '3') () 0 () () () 0 0)
-52 'no_kmc' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+53 'next_time' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN IMPLICIT-SAVE 0 0) (REAL 8 0 0 0 REAL ()) 0 0 () () 0 () () () 0
+0)
+54 'no_kmc' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-53 'numlin' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+55 'numlin' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-54 'param' 'param' '' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+56 'param' 'param' '' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 () () () 0 0)
-55 'pref' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+57 'pref' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 IMPLICIT-SAVE 0 0) (REAL 8 0 0 0 REAL ()) 0 0 () () 0 () () () 0 0)
-56 'prefactors' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
+58 'prefactors' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
 UNKNOWN IMPLICIT-SAVE 0 0 DIMENSION) (REAL 8 0 0 0 REAL ()) 0 0 () (1 0
 EXPLICIT (CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (
 INTEGER 4 0 0 0 INTEGER ()) 0 '4')) 0 () () () 0 0)
-57 'previous_direction' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT
+59 'previous_direction' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT
 UNKNOWN-PROC UNKNOWN IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0
 () () 0 () () () 0 0)
-58 'rat' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+60 'rat' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN 0 0 DIMENSION) (REAL 8 0 0 0 REAL ()) 0 0 () (1 0 EXPLICIT (
 CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '1') (CONSTANT (INTEGER 4 0 0 0
 INTEGER ()) 0 '10')) 0 () () () 0 0)
-59 'read_input' 'param' '' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC DECL
+61 'read_input' 'param' '' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC DECL
 UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 () () ()
 0 0)
-60 'real_seed' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
+62 'real_seed' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
 UNKNOWN IMPLICIT-SAVE 0 0) (REAL 8 0 0 0 REAL ()) 0 0 () () 0 () () () 0
 0)
-61 'seed' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+63 'seed' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-62 'skipl' 'strings' '' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC DECL
-UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 63 0 (64 65) () 0 ()
+64 'skipl' 'strings' '' 1 ((PROCEDURE UNKNOWN-INTENT MODULE-PROC DECL
+UNKNOWN 0 0 SUBROUTINE) (UNKNOWN 0 0 0 0 UNKNOWN ()) 65 0 (66 67) () 0 ()
 () () 0 0)
-66 'strings' 'strings' '' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+68 'strings' 'strings' '' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 () () () 0 0)
-67 'temperature' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
+69 'temperature' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
 UNKNOWN IMPLICIT-SAVE 0 0) (REAL 8 0 0 0 REAL ()) 0 0 () () 0 () () () 0
 0)
-68 'time' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+70 'time' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 IMPLICIT-SAVE 0 0) (REAL 8 0 0 0 REAL ()) 0 0 () () 0 () () () 0 0)
-69 'tiny' 'param' '' 1 ((PARAMETER UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+71 'time_interval' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
+UNKNOWN IMPLICIT-SAVE 0 0) (REAL 8 0 0 0 REAL ()) 0 0 () () 0 () () () 0
+0)
+72 'tiny' 'param' '' 1 ((PARAMETER UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 IMPLICIT-SAVE 0 0) (REAL 8 0 0 0 REAL ()) 0 0 () (CONSTANT (REAL 8 0 0 0
 REAL ()) 0 '0.10c6f7a0000000@-4') () 0 () () () 0 0)
-70 'total_states' 'param' '' 1 ((PARAMETER UNKNOWN-INTENT UNKNOWN-PROC
+73 'total_states' 'param' '' 1 ((PARAMETER UNKNOWN-INTENT UNKNOWN-PROC
 UNKNOWN IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () (
 CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2') () 0 () () () 0 0)
-71 'writing_state' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
+74 'writing_state' 'param' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC
 UNKNOWN IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () ()
 () 0 0)
 11 'line' '' '' 10 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
@@ -191,9 +199,9 @@ UNKNOWN 0 0 DUMMY) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 UNKNOWN 0 0 DUMMY) (LOGICAL 4 0 0 0 LOGICAL ()) 0 0 () () 0 () () () 0 0)
 40 'ierr' '' '' 34 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN 0 0 DUMMY) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-64 'nfil' '' '' 63 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+66 'nfil' '' '' 65 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN 0 0 DUMMY) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
-65 'ierr' '' '' 63 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+67 'ierr' '' '' 65 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN 0 0 DUMMY) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 )
 
@@ -202,8 +210,9 @@ UNKNOWN 0 0 DUMMY) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 18 'distance' 0 19 'do_statistics' 0 20 'dt' 0 21 'elem_barrier' 0 22
 'find_2strings' 0 23 'find_string' 0 33 'freq_statistics' 0 41
 'freq_writing' 0 42 'ierr' 0 43 'iprnt' 0 44 'kmc' 0 45 'line' 0 46
-'linend' 0 47 'linpos' 0 48 'luo' 0 49 'm' 0 50 'ncomm' 0 51 'no_kmc' 0
-52 'numlin' 0 53 'param' 0 54 'pref' 0 55 'prefactors' 0 56
-'previous_direction' 0 57 'rat' 0 58 'read_input' 0 59 'real_seed' 0 60
-'seed' 0 61 'skipl' 0 62 'strings' 0 66 'temperature' 0 67 'time' 0 68
-'tiny' 0 69 'total_states' 0 70 'writing_state' 0 71)
+'linend' 0 47 'linpos' 0 48 'luo' 0 49 'luo2' 0 50 'm' 0 51 'ncomm' 0 52
+'next_time' 0 53 'no_kmc' 0 54 'numlin' 0 55 'param' 0 56 'pref' 0 57
+'prefactors' 0 58 'previous_direction' 0 59 'rat' 0 60 'read_input' 0 61
+'real_seed' 0 62 'seed' 0 63 'skipl' 0 64 'strings' 0 68 'temperature' 0
+69 'time' 0 70 'time_interval' 0 71 'tiny' 0 72 'total_states' 0 73
+'writing_state' 0 74)

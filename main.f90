@@ -44,6 +44,12 @@ subroutine init_kmc()
 
     open(luo,file='kmc.out',form='formatted')
     write (luo,'(a)'), "# time(ms)  distance  kmc-step"
+
+    if ( time_interval .gt. 0 ) then 
+        open(luo2,file='kmc_time.out',form='formatted')
+        write (luo2,'(a)'), "# time(ms)  distance  kmc-step"
+    end if
+
 end subroutine init_kmc
 
 subroutine update_time()
@@ -64,6 +70,13 @@ subroutine write_evolution ()
      if ( kmc/freq_writing * freq_writing == kmc ) then
          write (luo,'(f24.5,i8,i14)'),time*1d-9,distance,kmc
      end if
+     if (time_interval .gt. 0 ) then
+         if ( time .gt. next_time ) then
+             write (luo2,'(f24.5,i8,i14)'),time*1d-9,distance,kmc
+             next_time = time + time_interval
+         end if
+     end if
+
 end subroutine write_evolution 
 
 subroutine finish()
