@@ -62,6 +62,7 @@ end subroutine
 subroutine write_evolution ()
     use param
     implicit none
+    integer :: counter=1
 !     writing_state = writing_state + 1
 !     if ( writing_state >= freq_writing ) then
 !         write (luo,'(f24.5,i8,i14)'),time*1d-9,distance,kmc
@@ -72,8 +73,9 @@ subroutine write_evolution ()
      end if
      if (time_interval .gt. 0 ) then
          if ( time .gt. next_time ) then
-             write (luo2,'(f24.5,i8,i14)'),time*1d-9,distance,kmc
-             next_time = time + time_interval
+             write (luo2,'(f14.4,i8,i14)'),time*1d-9,distance,kmc
+             next_time = counter*time_interval
+             counter = counter+1
          end if
      end if
 
