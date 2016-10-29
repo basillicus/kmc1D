@@ -31,7 +31,7 @@ module param
 !... Statistics variables
     logical   :: do_statistics   !> If to perform statistics
     integer   :: freq_statistics !> Perform statistics every this steps
-    integer   :: freq_writing=1000, writing_state=0    !> Write KMC state every freq_writing steps
+    integer   :: freq_writing, writing_state=0    !> Write KMC state every freq_writing steps
     real*8    :: time_interval=-1  !> Position will be written after this value
     real*8    :: next_time=0  !> updated to know next time to write position
 
@@ -209,6 +209,15 @@ module param
        read(Line(LinPos(2):LinEnd(2)),*,err=10) freq_statistics
     end if
     write(9,'(a,i7,a)')'... Heavy statistics perform every  = ',freq_statistics, ' kmc steps'
+
+    freq_writing = 10000
+    call find_string('freq_writing',12,Line,1,.true.,iErr)
+    if(iErr.eq.0) then
+       call CutStr(Line,NumLin,LinPos,LinEnd,0,0,iErr)
+       if(NumLin.lt.2) go to 10
+       read(Line(LinPos(2):LinEnd(2)),*,err=10) freq_writing
+    end if
+    write(9,'(a,i7,a)')'... KMC state will be written  every  = ',freq_writing, ' kmc steps'
     
 !_________________ Choose a time interval to write results
     call find_string('time_interval',13,Line,1,.true.,iErr)
