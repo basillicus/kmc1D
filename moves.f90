@@ -36,16 +36,23 @@ subroutine all_moves()
   ! end if
 
 
-  if (current_state == 1) then 
+  if (kind_of_PES == 0 ) then 
       ! Move to the right
       call fill_in (m,1,1,elem_barrier(1),rat(1),'diffus')
       ! Move to the left
       call fill_in (m,1,-1,elem_barrier(2),rat(2),'diffus')
-  else if (current_state == 2) then 
-      ! Move to the right
-      call fill_in (m,2,1,elem_barrier(3),rat(3),'diffus')
-      ! Move to the left
-      call fill_in (m,2,-1,elem_barrier(4),rat(4),'diffus')
+  else
+      if (current_state == 1) then 
+          ! Move to the right
+          call fill_in (m,1,1,elem_barrier(1),rat(1),'diffus')
+          ! Move to the left
+          call fill_in (m,1,-1,elem_barrier(2),rat(2),'diffus')
+      else if (current_state == 2) then 
+          ! Move to the right
+          call fill_in (m,2,1,elem_barrier(3),rat(3),'diffus')
+          ! Move to the left
+          call fill_in (m,2,-1,elem_barrier(4),rat(4),'diffus')
+      end if
   end if
 
   sum_rates=0.0
@@ -118,18 +125,22 @@ subroutine perform_move(m,kmc)
     ! La molecula solo avanza cuando se mueve desde el estado 2 y el sentido el movimiento es 
     ! el mismo que el sentido de movimiento del paso anterior
     case ('diffus')
-        if (i==1) then
-            ! Move to the next state
-            current_state = 2
-            ! distance = distance + j
-            previous_direction = j
-        else if (i == 2) then
-            current_state = 1
-            if (j == previous_direction ) then 
-                distance = distance + j
-            !    previous_direction = 0 !> No es necesario reiniciar este valor
-            end if
-        end if 
+        if (kind_of_PES == 0 ) then 
+            distance = distance + j
+        else 
+            if (i==1) then
+                ! Move to the next state
+                current_state = 2
+                ! distance = distance + j
+                previous_direction = j
+            else if (i == 2) then
+                current_state = 1
+                if (j == previous_direction ) then 
+                    distance = distance + j
+                !    previous_direction = 0 !> No es necesario reiniciar este valor
+                end if
+            end if 
+        end if
     end select
 end subroutine perform_move
 

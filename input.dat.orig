@@ -8,21 +8,19 @@ printing 1
 #     2 - 1->2 Left
 #     3 - 2->1 Right
 #     4 - 2->1 Left
-kind_of_PES 0
-barriers 0.23 0.23 
+barriers 0.23 0.23 0.1 0.1 
 
 #.... Prefactor (in ps^-1) 
 #     1 - 1->2 Right  | The TS are different in one direction
 #     2 - 1->2 Left   | and in the ohter
 #     3 - 2->1 Right
 #     4 - 2->1 Left
-prefactors  1.0 1.0 
+prefactors  1.0 1.0 1.0 1.0
 
 # Temperature (in K)
 temperature 300.0
 # Disipation factor: E(x) = E(0) + alpha*x
 alpha 0.0005
-freq_writing 1000
 
 number_of_kmc_steps 100000
-time_interval 100000
+time_interval 1000000

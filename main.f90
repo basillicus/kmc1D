@@ -49,7 +49,6 @@ subroutine init_kmc()
         open(luo2,file='kmc_time.out',form='formatted')
         write (luo2,'(a)'), "# time(ms)  distance  kmc-step"
     end if
-
 end subroutine init_kmc
 
 subroutine update_time()
