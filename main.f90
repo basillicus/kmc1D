@@ -24,6 +24,8 @@ program KMC_1D
         call perform_move(m,kmc)
         ! Update time
         call update_time()
+        ! Update field if oscilatory
+        if (oscilatory_field) call update_field()
         ! Write the evolution in a file
         call write_evolution()
 
@@ -58,17 +60,31 @@ subroutine update_time()
     time = time + dt 
 end subroutine
 
+subroutine update_field()
+    use param
+    implicit none
+
+    !alpha = alpha_0*cos( 2*pi*freq_field*1.0d-12*time ) 
+    alpha = alpha_0*sin( 2*pi*freq_field*1.0d-12*time ) 
+    call compute_rates ()
+    ! ! KKK
+    !  if ( kmc/freq_writing * freq_writing == kmc ) call write_debug ()
+
+end subroutine
+
 subroutine write_evolution ()
     use param
     implicit none
     integer :: counter=1
+
 !     writing_state = writing_state + 1
 !     if ( writing_state >= freq_writing ) then
 !         write (luo,'(f24.5,i8,i14)'),time*1d-9,distance,kmc
 !         writing_state = 0
 !     end if
      if ( kmc/freq_writing * freq_writing == kmc ) then
-         write (luo,'(f24.5,i8,i14)'),time*1d-9,distance,kmc
+         write (luo,'(f24.5,i10,i14)'),time*1d-9,distance,kmc
+         call write_debug ()
      end if
      if (time_interval .gt. 0 ) then
          if ( time .gt. next_time ) then
@@ -84,4 +100,5 @@ subroutine finish()
     use param
     implicit none
     close (luo)
+    close (luo2)
 end subroutine finish
