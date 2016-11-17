@@ -8,6 +8,7 @@ subroutine all_moves()
   ! use param
   implicit none
       integer :: k
+      real*8  :: rate
   m=0
 
   if (kind_of_PES == 0 ) then 
@@ -33,6 +34,14 @@ subroutine all_moves()
   do k=1,m
       sum_rates=sum_rates+movement(k)%rate
   end do
+!
+!....... add DO NOTHING as a move if the fixed-step KMC is ON
+!
+  if ( constant_time_step > 0 ) then 
+     rate=exp(-sum_rates*dt)
+     call fill_in(m,current_state,0,0.0d0,rate,'do NOTHING')
+  end if
+
   No_moves=m
 
 end subroutine all_moves
@@ -45,23 +54,36 @@ subroutine which_move(m)
 ! time - time for that move to take place (in units of the rates)
 !.........................................................................
     implicit none 
-    integer m,m1
-    real*8 R,x,rx,x1
+    integer m,m1, Nom
+    real*8 R,x,rx,x1,ex
     real ran2
-!
+
+    R=sum_rates 
 !__________________ calculate time
-    R=sum_rates ; x1=ran2(seed) ; dt=-1.0/R*log(x1)  
+    if (constant_time_step < 0 ) then ! standard KMC
+         ex=0.0d0;  Nom = No_moves
+         x1=ran2(seed) ; dt=-1.0/R*log(x1)  
+    else ! if constant_time_step > 0 --> dt is constant
+         ex=exp(-R*dt) ; Nom = No_moves - 1
+    end if 
 !
 !_____________ trap the transition number
 !    
     x=ran2(seed) ; rx=0.0
 
-    do m1=1,No_moves
-       rx=rx+movement(m1)%rate/R 
+    do m1=1,Nom
+       rx=rx+movement(m1)%rate/R*(1.0d0-ex) 
        if(x.lt.rx) then
           m=m1 ; return
        end if
     end do
+
+    if (constant_time_step < 0 ) then 
+        write (luo0,'(a),i10') 'No move found! at kmc step: ', kmc
+    else ! Constant time step
+        m=No_moves
+    end if
+
 end subroutine which_move
 
 subroutine perform_move(m,kmc)

@@ -17,6 +17,7 @@ module param
 
 !  Time variables
     real*8  :: time, dt
+    real*8  :: constant_time_step=-1
 
 !... useful global-types
     real*8, parameter :: tiny=0.000001
@@ -210,6 +211,16 @@ module param
     end if
     write(luo0,'(a,i7,a)')'... KMC state will be written  every  = ',freq_writing, ' kmc steps'
     
+!_________________ Choose if a fixed time step KMC
+    call find_string('constant_time_step',18,Line,1,.true.,iErr)
+    if(iErr.eq.0) then
+       call CutStr(Line,NumLin,LinPos,LinEnd,0,0,iErr)
+       if(NumLin.lt.2) call error_message ('ERROR: specify constant_time_step (in ps)')
+       read(Line(LinPos(2):LinEnd(2)),*,err=10) constant_time_step
+       dt=constant_time_step
+    end if
+    write(luo0,'(a,f10.5,a)')'... Constant Time Step KMC with a dt  = ',constant_time_step, 'ps'
+
 !_________________ Choose a time interval to write results
     call find_string('time_interval',13,Line,1,.true.,iErr)
     if(iErr.eq.0) then

@@ -1,5 +1,5 @@
 GFORTRAN module version '10' created from move.f90
-MD5:28de11e3a7cd45709f0c58689d7eaff5 -- If you edit this, you'll get what you deserve.
+MD5:22d6c0824c2250f2b8dad802fb87c507 -- If you edit this, you'll get what you deserve.
 
 (() () () () () () () () () () () () () () () () () () () () () () () ()
 () () ())
@@ -26,9 +26,8 @@ UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN 0 0) UNKNOWN-ACCESS ()) (7
 'type' (CHARACTER 1 0 0 0 CHARACTER ((CONSTANT (INTEGER 4 0 0 0 INTEGER
 ()) 0 '6'))) () (UNKNOWN-FL UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN UNKNOWN
 0 0) UNKNOWN-ACCESS ())) PUBLIC (() () () ()) () 0 0 11464753)
-8 'max_moves' 'move' '' 1 ((PARAMETER UNKNOWN-INTENT UNKNOWN-PROC
-UNKNOWN IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () (
-CONSTANT (INTEGER 4 0 0 0 INTEGER ()) 0 '2') () 0 () () () 0 0)
+8 'max_moves' 'move' '' 1 ((VARIABLE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
+IMPLICIT-SAVE 0 0) (INTEGER 4 0 0 0 INTEGER ()) 0 0 () () 0 () () () 0 0)
 9 'move' 'move' '' 1 ((MODULE UNKNOWN-INTENT UNKNOWN-PROC UNKNOWN
 UNKNOWN 0 0) (UNKNOWN 0 0 0 0 UNKNOWN ()) 0 0 () () 0 () () () 0 0)
 10 'move_attr' 'move' '' 1 ((PROCEDURE UNKNOWN-INTENT UNKNOWN-PROC DECL

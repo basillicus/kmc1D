@@ -37,6 +37,7 @@ end program
 
 subroutine init_kmc()
     use param
+    use move
     ! Set the initial state of the system
     implicit none
 
@@ -44,6 +45,8 @@ subroutine init_kmc()
     previous_direction = 0 
     time = 0
 
+    ! If non standard KMC add the posibility of do nothing
+    if ( constant_time_step > 0 ) max_moves=max_moves+1
     open(luo,file='kmc.out',form='formatted')
     write (luo,'(a)'), "# time(ms)  distance  kmc-step"
 
