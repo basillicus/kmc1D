@@ -266,7 +266,7 @@ module param
   end subroutine
 
   subroutine warning_message (message)
-!................ errors in reading input
+!................  warning reading input
       implicit none
       character (len=*):: message
 
@@ -292,6 +292,11 @@ module param
       else 
           do i=1,4
              pref= +1.0 * log(prefactors(i))
+             ! TODO: Fix the tilting by adding to each rate:
+             !       rat(i)=exp(-beta*(elem_barrier(i)+alpha/4)+pref)
+             !       or
+             !       rat(i)=exp(-beta*(elem_barrier(i)-alpha/4)+pref)
+             ! Think when to sum or substract.
              if ( i == 2 ) then ! i == 2 Pushing diffusion to the right
                  rat(i)=exp(-beta*(elem_barrier(i)+alpha)+pref)
              else 

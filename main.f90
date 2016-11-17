@@ -64,8 +64,8 @@ subroutine update_field()
     use param
     implicit none
 
-    !alpha = alpha_0*cos( 2*pi*freq_field*1.0d-12*time ) 
-    alpha = alpha_0*sin( 2*pi*freq_field*1.0d-12*time ) 
+    alpha = alpha_0*cos( 2*pi*freq_field*1.0d-12*time ) 
+    !alpha = alpha_0*sin( 2*pi*freq_field*1.0d-12*time ) 
     call compute_rates ()
     ! ! KKK
     !  if ( kmc/freq_writing * freq_writing == kmc ) call write_debug ()

@@ -1,7 +1,7 @@
 printing 1
 
 # If seed is not given a different random number is choosen at each run
-seed 
+#seed  10
 
 #.... Elementary barriers (in eV)
 #     1 - 1->2 Right
