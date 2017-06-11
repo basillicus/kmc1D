@@ -79,7 +79,7 @@ subroutine which_move(m)
     end do
 
     if (constant_time_step < 0 ) then 
-        write (luo0,'(a),i10') 'No move found! at kmc step: ', kmc
+        write (luo0,'(a,i10)') 'No move found! at kmc step: ', kmc
     else ! Constant time step
         m=No_moves
     end if

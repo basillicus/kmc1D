@@ -40,6 +40,8 @@ subroutine init_kmc()
     use move
     ! Set the initial state of the system
     implicit none
+    character :: eb*20='', str*200=''
+    integer :: i
 
     current_state= 1  
     previous_direction = 0 
@@ -48,6 +50,14 @@ subroutine init_kmc()
     ! If non standard KMC add the posibility of do nothing
     if ( constant_time_step > 0 ) max_moves=max_moves+1
     open(luo,file='kmc.out',form='formatted')
+    ! Write info of the system in the header of the kmc.out file
+    do i=1,size(elem_barrier)
+        write (eb, '(f9.5)') elem_barrier(i)
+        str = trim(str) // trim(eb)
+    end do
+    write (luo,'(a)'), "# E_barriers: " // trim(str)
+    write (eb, '(10f5.2)') alpha
+    write (luo,'(a)'), "# alpha: " // trim(eb)
     write (luo,'(a)'), "# time(ms)  distance  kmc-step"
 
     if ( time_interval .gt. 0 ) then 

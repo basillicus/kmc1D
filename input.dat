@@ -14,7 +14,8 @@ kind_of_PES 1
 constant_time_step 100
 
 # barriers 0.23 0.23 0.1 0.1
-barriers 0.25 0.25 0.1 0.1
+#barriers 0.25 0.25 0.1 0.1
+barriers 22.25 0.25 0.1 0.1
 #barriers 0.2 0.2
 #.... Prefactor (in ps^-1) 
 #     1 - 1->2 Right  | The TS are different in one direction
@@ -33,6 +34,6 @@ oscilatory_field .true.
 # Freq E. field in Hz (1/sec) 
 freq_field 10000
 
-number_of_kmc_steps 5000000
+number_of_kmc_steps 50000
 time_interval 0.001
 freq_writing 1000

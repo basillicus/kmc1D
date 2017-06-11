@@ -95,7 +95,7 @@ function update_parameters {
         temperature=$(echo "$temperature + $deltaT " | bc )
     elif [ $1 == "energies" ]; then
             e1=$(echo "$e1 + $deltaE1"| bc)
-            e2=$(echo "$e2 + $deltaE1"| bc)
+            e4=$(echo "$e4 + $deltaE1"| bc)
         echo "Energies: " $e1   $e2
     elif [ $1 == "alpha" ]; then
         alpha=$(echo "$alpha + $delta_alpha" | bc )
