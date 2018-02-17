@@ -50,7 +50,8 @@ module param
 !... E field parameters
     real*8  :: alpha=0, alpha_0  !> field factors alpha=alpha_0*sin(omega*t)
     logical :: oscilatory_field=.false. !> If true -> <Direction> changes every <freq_field>
-    integer :: field_direction=1 !> Direction of the E field: [1 or -1]
+    integer :: field_shape=1 !> Shape of the external field (1:sinusoidal|2:square)
+    real*8  :: assym_factor=0.0 !> Assymetry of the square wave of the E field
     real*8  :: freq_field=1000000.0 !> Field's frequency omega (Hz?)
     real*8,parameter :: pi = 3.1415926535897931
 
@@ -158,6 +159,24 @@ module param
     end if
     write(luo0,'(a,L3)')'... Oscilatory field  = ', oscilatory_field
     write(luo0,'(a)')'... alpha(w,t) = alpha_0 *sin(omega*t)'
+
+    call find_string('field_shape',11,Line,1,.true.,iErr)
+    if(iErr.eq.0) then
+       call CutStr(Line,NumLin,LinPos,LinEnd,0,0,iErr)
+       if(NumLin.lt.2) call error_message ('ERROR: please write field_shape 1 or 2 ')
+       read(Line(LinPos(2):LinEnd(2)),*,err=10) field_shape
+    end if
+    write(luo0,'(a,L3)')'... field shape  = ', field_shape
+    write(luo0,'(a)')'... alpha(w,t) = alpha_0 *sign|sin(omega*t) + assymetry_factor |'
+
+    call find_string('assym_factor',12,Line,1,.true.,iErr)
+    if(iErr.eq.0) then
+       call CutStr(Line,NumLin,LinPos,LinEnd,0,0,iErr)
+       if(NumLin.lt.2) call error_message ('ERROR: please write assym_factor <real> ; 0<r<1 ')
+       read(Line(LinPos(2):LinEnd(2)),*,err=10) assym_factor
+    end if
+    write(luo0,'(a,L3)')'... assymetry factor  = ', assym_factor
+
 !_________________ Frequency of the oscilatory field 
     call find_string('freq_field',10,Line,1,.true.,iErr)
     if(iErr.eq.0) then

@@ -93,8 +93,14 @@ subroutine update_field()
     use param
     implicit none
 
-    alpha = alpha_0*cos( 2*pi*freq_field*1.0d-12*time ) 
-    !alpha = alpha_0*sin( 2*pi*freq_field*1.0d-12*time ) 
+    ! Sinusoidal field
+    if ( field_shape  == 1 ) then
+        alpha = alpha_0*cos( 2*pi*freq_field*1.0d-12*time ) 
+        !alpha = alpha_0*sin( 2*pi*freq_field*1.0d-12*time ) 
+    ! Square field
+    else if ( field_shape  == 2 ) then 
+        alpha = sign(alpha_0, cos( 2*pi*freq_field*1.0d-12*time )+assym_factor )
+    end if
     call compute_rates ()
     ! ! KKK
     !  if ( kmc/freq_writing * freq_writing == kmc ) call write_debug ()

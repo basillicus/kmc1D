@@ -15,7 +15,8 @@ constant_time_step 100
 
 # barriers 0.23 0.23 0.1 0.1
 #barriers 0.25 0.25 0.1 0.1
-barriers 22.25 0.25 0.1 0.1
+barriers 0.32569308 0.18637078 0.16286015 0.30218245
+
 #barriers 0.2 0.2
 #.... Prefactor (in ps^-1) 
 #     1 - 1->2 Right  | The TS are different in one direction
@@ -28,12 +29,14 @@ prefactors  10.0 10.0 10.0 10.0
 temperature 300.0
 
 # External field factor: E(x) = E(0) + alpha*x (in eV)
-alpha -0.01
+alpha 0.1
 # oscilatory_field .false.
 oscilatory_field .true.
+assym_factor 0.9
+field_shape 2
 # Freq E. field in Hz (1/sec) 
 freq_field 10000
 
-number_of_kmc_steps 50000
+number_of_kmc_steps 5000000
 time_interval 0.001
 freq_writing 1000
