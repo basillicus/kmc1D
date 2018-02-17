@@ -61,19 +61,31 @@ subroutine init_kmc()
         str = trim(str) // trim(cha)
     end do
     write (luo,'(a)'), "# E_barriers: " // trim(str) // " (eV)"
+
     if ( time_interval .gt. 0 )  write (luo2,'(a)'), "# E_barriers: " // trim(str) // " (eV)"
+
     write (cha, '(f9.5)') alpha
     write (luo,'(a)'), "# alpha: " // trim(cha) // " eV"
+
     if ( time_interval .gt. 0 ) write (luo2,'(a)'), "# alpha: " // trim(cha) // " eV"
+
     if (oscilatory_field)  then 
+        write (luo,'(a)'), "# Oscilatory external field: True"
         write (cha, '(f12.4)') freq_field
         write (luo,'(a)'), "# frequency: " // trim(cha) // " Hz"
-        if ( time_interval .gt. 0 ) write (luo2,'(a)'), "# frequency: " // trim(cha) // " Hz"
+        if (field_shape == 1 ) then 
+            write (luo,'(a)'), "# field shape: sinusoidal" 
+        else if (field_shape == 2 ) then 
+            write (cha, '(f9.5)') assym_factor
+            write (luo,'(a)'), "# field shape: square wave" 
+            write (luo,'(a)'), "# Assymetric factor:"  // trim(cha)
+        end if
     else
         write (luo,'(a)'), "# frequency: 0 Hz"
         if ( time_interval .gt. 0 ) write (luo2,'(a)'), "# frequency: 0 Hz"
 
     end if
+
     write (cha, '(f9.3)') temperature
     write (luo,'(a)'), "# temperature: " // trim(cha) // " K"
     if ( time_interval .gt. 0 ) write (luo2,'(a)'), "# temperature: " // trim(cha) // " K"
