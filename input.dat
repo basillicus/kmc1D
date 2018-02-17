@@ -27,7 +27,7 @@ prefactors  10.0 10.0 10.0 10.0
 # Temperature (in K)
 temperature 300.0
 
-# Electric field factor: E(x) = E(0) + alpha*x
+# External field factor: E(x) = E(0) + alpha*x (in eV)
 alpha -0.01
 # oscilatory_field .false.
 oscilatory_field .true.

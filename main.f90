@@ -40,7 +40,7 @@ subroutine init_kmc()
     use move
     ! Set the initial state of the system
     implicit none
-    character :: eb*20='', str*200=''
+    character :: cha*20='', str*200=''
     integer :: i
 
     current_state= 1  
@@ -50,20 +50,36 @@ subroutine init_kmc()
     ! If non standard KMC add the posibility of do nothing
     if ( constant_time_step > 0 ) max_moves=max_moves+1
     open(luo,file='kmc.out',form='formatted')
-    ! Write info of the system in the header of the kmc.out file
-    do i=1,size(elem_barrier)
-        write (eb, '(f9.5)') elem_barrier(i)
-        str = trim(str) // trim(eb)
-    end do
-    write (luo,'(a)'), "# E_barriers: " // trim(str)
-    write (eb, '(10f5.2)') alpha
-    write (luo,'(a)'), "# alpha: " // trim(eb)
-    write (luo,'(a)'), "# time(ms)  distance  kmc-step"
 
     if ( time_interval .gt. 0 ) then 
         open(luo2,file='kmc_time.out',form='formatted')
-        write (luo2,'(a)'), "# time(ms)  distance  kmc-step"
     end if
+
+    ! Write info of the system in the header of the kmc.out file
+    do i=1,size(elem_barrier)
+        write (cha, '(f9.5)') elem_barrier(i)
+        str = trim(str) // trim(cha)
+    end do
+    write (luo,'(a)'), "# E_barriers: " // trim(str) // " (eV)"
+    if ( time_interval .gt. 0 )  write (luo2,'(a)'), "# E_barriers: " // trim(str) // " (eV)"
+    write (cha, '(f9.5)') alpha
+    write (luo,'(a)'), "# alpha: " // trim(cha) // " eV"
+    if ( time_interval .gt. 0 ) write (luo2,'(a)'), "# alpha: " // trim(cha) // " eV"
+    if (oscilatory_field)  then 
+        write (cha, '(f12.4)') freq_field
+        write (luo,'(a)'), "# frequency: " // trim(cha) // " Hz"
+        if ( time_interval .gt. 0 ) write (luo2,'(a)'), "# frequency: " // trim(cha) // " Hz"
+    else
+        write (luo,'(a)'), "# frequency: 0 Hz"
+        if ( time_interval .gt. 0 ) write (luo2,'(a)'), "# frequency: 0 Hz"
+
+    end if
+    write (cha, '(f9.3)') temperature
+    write (luo,'(a)'), "# temperature: " // trim(cha) // " K"
+    if ( time_interval .gt. 0 ) write (luo2,'(a)'), "# temperature: " // trim(cha) // " K"
+    write (luo,'(a)'), "# time(ms)  distance  kmc-step"
+    if ( time_interval .gt. 0 ) write (luo2,'(a)'), "# time(ms)  distance  kmc-step"
+
 end subroutine init_kmc
 
 subroutine update_time()

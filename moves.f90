@@ -115,7 +115,7 @@ subroutine perform_move(m,kmc)
                 current_state = 1
                 if (j == previous_direction ) then 
                     distance = distance + j
-                !    previous_direction = 0 !> No es necesario reiniciar este valor
+                    ! previous_direction = 0 !> No es necesario reiniciar este valor
                 end if
             end if 
         end if
