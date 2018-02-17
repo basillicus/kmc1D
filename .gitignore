@@ -1,5 +1,7 @@
 .*.swp
 .*.swo
+kmc.out
+kmc_time.out
 aminus
 aminus_2p
 aminus_2pp
