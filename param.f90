@@ -2,9 +2,9 @@ module param
   use strings
   implicit none
 
-    integer :: kmc !> #Step of the simulation
+    integer*8 :: kmc !> #Step of the simulation
 !... No_kmc - number of KMC steps
-    integer :: No_kmc
+    integer*8 :: No_kmc
     integer :: m  !> Index of each move
 !... Max. number of states the code can handle so far
     integer, parameter :: total_states=2 

@@ -88,6 +88,8 @@ subroutine init_kmc()
 
     write (cha, '(f9.3)') temperature
     write (luo,'(a)'), "# temperature: " // trim(cha) // " K"
+    write (cha, '(i20)') No_kmc
+    write (luo,'(a)'), "# No KMC steps: " // trim(cha) // " K"
     if ( time_interval .gt. 0 ) write (luo2,'(a)'), "# temperature: " // trim(cha) // " K"
     write (luo,'(a)'), "# time(ms)  distance  kmc-step"
     if ( time_interval .gt. 0 ) write (luo2,'(a)'), "# time(ms)  distance  kmc-step"

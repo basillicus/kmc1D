@@ -89,7 +89,8 @@ end subroutine which_move
 subroutine perform_move(m,kmc)
 
     implicit none
-    integer m,i,j,kmc
+    integer m,i,j
+    integer*8 kmc
     character*6 type
 
     
