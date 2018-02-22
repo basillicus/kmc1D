@@ -33,6 +33,9 @@ module param
     character :: Line*200
     integer   :: LinEnd(100), LinPos(100), NumLin, iErr
 
+!... strings for outputs
+    character :: outfile*200='kmc.out'
+
 !... Statistics variables
     logical   :: do_statistics   !> If to perform statistics
     integer   :: freq_statistics !> Perform statistics every this steps
@@ -70,6 +73,14 @@ module param
     open(lui,file='input.dat', form='formatted')
     open(luo0,file='kmc.log', form='formatted')
 
+    call find_string('output_file',11,Line,1,.true.,iErr)
+    if(iErr.eq.0) then
+       call CutStr(Line,NumLin,LinPos,LinEnd,0,0,iErr)
+       if(NumLin.lt.2) call error_message ('ERROR: please write output_file filename')
+       read(Line(LinPos(2):LinEnd(2)),*,err=10) outfile
+       outfile=trim(outfile)
+    end if
+    write(luo0,'(a,L3)')'... Output file   = ', outfile
 !
 !_________________ No of KMC steps
 !

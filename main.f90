@@ -49,7 +49,8 @@ subroutine init_kmc()
 
     ! If non standard KMC add the posibility of do nothing
     if ( constant_time_step > 0 ) max_moves=max_moves+1
-    open(luo,file='kmc.out',form='formatted')
+    ! open(luo,file='kmc.out',form='formatted')
+    open(luo,file=outfile,form='formatted')
 
     if ( time_interval .gt. 0 ) then 
         open(luo2,file='kmc_time.out',form='formatted')
