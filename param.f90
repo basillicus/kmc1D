@@ -51,14 +51,22 @@ module param
     real*8  :: beta
 
 !... E field parameters
-    real*8  :: alpha=0, alpha_0  !> field factors alpha=alpha_0*sin(omega*t)
     logical :: oscilatory_field=.false. !> If true -> <Direction> changes every <freq_field>
     integer :: field_shape=1 !> Shape of the external field (1:sinusoidal|2:square)
+    real*8  :: alpha=0, alpha_0  !> field factors alpha=alpha_0*sin(omega*t)
     real*8  :: assym_factor=0.0 !> Assymetry of the square wave of the E field
-    real*8  :: freq_field=1000000.0 !> Field's frequency omega (Hz?)
-    real*8,parameter :: pi = 3.1415926535897931
+    real*8  :: freq_field=10000.0 !> Field's frequency omega (Hz?)
+
+!... Pulse parameters
+    logical :: pulse_on=.false. !> If true -> Adds a pulse
+    real*8  :: pulse=0.0 !> Pulse value
+    real*8  :: pulse_wave=0.0 !> Sinusoidal wave to generate the actual pulse
+    real*8  :: pulse_amplitud=0.0
+    real*8  :: pulse_omega=0.0
+    real*8  :: pulse_width=0.0
 
     real*8,parameter :: Boltzm = 8.617343e-5  ! in eV/K
+    real*8,parameter :: pi = 3.1415926535897931
 
  
   CONTAINS
@@ -187,7 +195,6 @@ module param
        read(Line(LinPos(2):LinEnd(2)),*,err=10) assym_factor
     end if
     write(luo0,'(a,L3)')'... assymetry factor  = ', assym_factor
-
 !_________________ Frequency of the oscilatory field 
     call find_string('freq_field',10,Line,1,.true.,iErr)
     if(iErr.eq.0) then
@@ -196,6 +203,41 @@ module param
        read(Line(LinPos(2):LinEnd(2)),*,err=10) freq_field
     end if
     if (oscilatory_field) write(luo0,'(a,f12.4,a)')'... Frequency of the Oscilatory field (omega)  = ', freq_field, " (Hz)"
+
+!
+!_________________ pulse parameters 
+!
+    call find_string('pulse_on',8,Line,1,.true.,iErr)
+    if(iErr.eq.0) then
+       call CutStr(Line,NumLin,LinPos,LinEnd,0,0,iErr)
+       if(NumLin.lt.2) call error_message ('ERROR: please write pulse_on .true. or .false.')
+       read(Line(LinPos(2):LinEnd(2)),*,err=10) pulse_on
+    end if
+    call find_string('pulse_amplitud',14,Line,1,.true.,iErr)
+    if(iErr.eq.0) then
+       call CutStr(Line,NumLin,LinPos,LinEnd,0,0,iErr)
+       if(NumLin.lt.2) call error_message ('ERROR: please write pulse_amplitud <amplitud.real>')
+       read(Line(LinPos(2):LinEnd(2)),*,err=10) pulse_amplitud
+    end if
+    call find_string('pulse_omega',11,Line,1,.true.,iErr)
+    if(iErr.eq.0) then
+       call CutStr(Line,NumLin,LinPos,LinEnd,0,0,iErr)
+       if(NumLin.lt.2) call error_message ('ERROR: please write pulse_omega <omega.real>')
+       read(Line(LinPos(2):LinEnd(2)),*,err=10) pulse_omega
+    end if
+    call find_string('pulse_width',11,Line,1,.true.,iErr)
+    if(iErr.eq.0) then
+       call CutStr(Line,NumLin,LinPos,LinEnd,0,0,iErr)
+       if(NumLin.lt.2) call error_message ('ERROR: please write pulse_width <width.real>')
+       read(Line(LinPos(2):LinEnd(2)),*,err=10) pulse_width
+    end if
+    if (pulse_on) then 
+       write(luo0,'(a,L3)')'... Pulse is ON. Pulse parameters are:'
+       write(luo0,'(a,L3)')'... Pulse amplitud = ', pulse_amplitud
+       write(luo0,'(a,L3)')'... Pulse omega = ', pulse_omega
+       write(luo0,'(a,L3)')'... Pulse width = ', pulse_width
+     end if
+
 ! !
 ! !________ prefix to the rate, i.e. the exp prefactor to the rate:
 ! !         - in inverse ps (1 ps=10^{-12} s)

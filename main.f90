@@ -25,7 +25,7 @@ program KMC_1D
         ! Update time
         call update_time()
         ! Update field if oscilatory
-        if (oscilatory_field) call update_field()
+        if (oscilatory_field .or. pulse_on) call update_field()
         ! Write the evolution in a file
         call write_evolution()
 
@@ -116,7 +116,23 @@ subroutine update_field()
     else if ( field_shape  == 2 ) then 
         alpha = sign(alpha_0, cos( 2*pi*freq_field*1.0d-12*time )+assym_factor )
     end if
+
+    ! Add pulse if requested
+    if (pulse_on) then 
+        ! Generate sinusoidal wave with the pulse frequency
+        pulse_wave = cos( 2*pi*pulse_omega*1.0d-12*time ) 
+        ! Pulse_width is a threshold when the pulse wave is bigger than that the
+        ! pulse gets active
+        if (pulse_wave > pulse_width) then 
+          pulse = pulse_amplitud
+        else 
+          pulse = 0
+        end if
+        alpha = alpha + pulse
+    end if
+
     call compute_rates ()
+
     ! ! KKK
     !  if ( kmc/freq_writing * freq_writing == kmc ) call write_debug ()
 

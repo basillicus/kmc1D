@@ -32,12 +32,20 @@ temperature 300.0
 
 # External field factor: E(x) = E(0) + alpha*x (in eV)
 alpha 0.1
-# oscilatory_field .false.
-oscilatory_field .true.
-assym_factor 0.9
-field_shape 2
+
+# Oscillatory field parameters
+oscilatory_field .false.
 # Freq E. field in Hz (1/sec) 
 freq_field 10000
+# oscilatory_field .false.
+field_shape 1  # 1: sinusoidal | 2: square
+assym_factor 0.9
+
+# Pulse parameters
+pulse_on .true.
+pulse_amplitud 0.1 # in eV
+pulse_omega 10000   # in Hz
+pulse_width 0.5    # in ?
 
 number_of_kmc_steps 5000000
 time_interval 0.001
