@@ -1,7 +1,10 @@
 .*.swp
 .*.swo
+*.mod
+a.out
 kmc.out
 kmc_time.out
+fort.99
 aminus
 aminus_2p
 aminus_2pp
@@ -10,9 +13,7 @@ aplus
 aplus_2p
 aplus_2pp
 aplus_omega0
-a.out
 bugHunting/
-fort.99
 input.dat.1
 input.dat.bak
 input.dat.paper

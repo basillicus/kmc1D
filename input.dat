@@ -1,5 +1,7 @@
 printing 1
 
+output_file prefix
+
 # If seed is not given a different random number is choosen at each run
 #seed  10
 
@@ -15,7 +17,7 @@ constant_time_step 100
 
 # barriers 0.23 0.23 0.1 0.1
 #barriers 0.25 0.25 0.1 0.1
-barriers 0.32569308 0.18637078 0.16286015 0.30218245
+barriers 0.32569308 0.30218245 0.16286015 0.18637078  
 
 #barriers 0.2 0.2
 #.... Prefactor (in ps^-1) 
