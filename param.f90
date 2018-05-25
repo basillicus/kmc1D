@@ -55,6 +55,7 @@ module param
     integer :: field_shape=1 !> Shape of the external field (1:sinusoidal|2:square)
     real*8  :: alpha=0, alpha_0  !> field factors alpha=alpha_0*sin(omega*t)
     real*8  :: assym_factor=0.0 !> Assymetry of the square wave of the E field
+    real*8  :: displ_factor=0.0 !> Displacement of the  waves (sinusoidal or sqaure)
     real*8  :: freq_field=10000.0 !> Field's frequency omega (Hz?)
 
 !... Pulse parameters
@@ -177,7 +178,6 @@ module param
        read(Line(LinPos(2):LinEnd(2)),*,err=10) oscilatory_field
     end if
     write(luo0,'(a,L3)')'... Oscilatory field  = ', oscilatory_field
-    write(luo0,'(a)')'... alpha(w,t) = alpha_0 *sin(omega*t)'
 
     call find_string('field_shape',11,Line,1,.true.,iErr)
     if(iErr.eq.0) then
@@ -186,15 +186,29 @@ module param
        read(Line(LinPos(2):LinEnd(2)),*,err=10) field_shape
     end if
     write(luo0,'(a,L3)')'... field shape  = ', field_shape
-    write(luo0,'(a)')'... alpha(w,t) = alpha_0 *sign|sin(omega*t) + assymetry_factor |'
 
     call find_string('assym_factor',12,Line,1,.true.,iErr)
     if(iErr.eq.0) then
        call CutStr(Line,NumLin,LinPos,LinEnd,0,0,iErr)
-       if(NumLin.lt.2) call error_message ('ERROR: please write assym_factor <real> ; 0<r<1 ')
+       if(NumLin.lt.2) call error_message ('ERROR: please write assym_factor <real> ; -1<r<1 ')
        read(Line(LinPos(2):LinEnd(2)),*,err=10) assym_factor
     end if
-    write(luo0,'(a,L3)')'... assymetry factor  = ', assym_factor
+
+    call find_string('displ_factor',12,Line,1,.true.,iErr)
+    if(iErr.eq.0) then
+       call CutStr(Line,NumLin,LinPos,LinEnd,0,0,iErr)
+       if(NumLin.lt.2) call error_message ('ERROR: please write displ_factor <real> ; -A0 < d < +A0 ')
+       read(Line(LinPos(2):LinEnd(2)),*,err=10) displ_factor
+    end if
+
+    if (oscilatory_field .and. field_shape == 2 ) then
+        write(luo0,'(a)')'... alpha(w,t) = alpha_0 *sign|sin(omega*t) + assymetry_factor | + displ_factor'
+        write(luo0,'(a,L3)')'... Assymetry factor  = ', assym_factor
+        write(luo0,'(a,L3)')'... Displacing factor  = ', displ_factor
+    else if (oscilatory_field .and. field_shape == 1 ) then 
+        write(luo0,'(a)')'... alpha(w,t) = alpha_0 *sin(omega*t)'
+    end if
+
 !_________________ Frequency of the oscilatory field 
     call find_string('freq_field',10,Line,1,.true.,iErr)
     if(iErr.eq.0) then
@@ -231,6 +245,7 @@ module param
        if(NumLin.lt.2) call error_message ('ERROR: please write pulse_width <width.real>')
        read(Line(LinPos(2):LinEnd(2)),*,err=10) pulse_width
     end if
+
     if (pulse_on) then 
        write(luo0,'(a,L3)')'... Pulse is ON. Pulse parameters are:'
        write(luo0,'(a,L3)')'... Pulse amplitud = ', pulse_amplitud
@@ -246,7 +261,7 @@ module param
 !...................... RATES TABLE ...............................................................
 !
     call compute_rates ()
-    call write_data_in_log ()
+    call write_rates_in_log ()
 !
 !________________ level of print: 0 - very little; 5 - a lot
 ! 
@@ -254,10 +269,10 @@ module param
     call find_string('printing',8,Line,1,.true.,iErr)
     if(iErr.eq.0) then
        call CutStr(Line,NumLin,LinPos,LinEnd,0,0,iErr)
-       if(NumLin.lt.2) call error_message ('ERROR: please specified a printing level (does nothing currently)')
+       if(NumLin.lt.2) call error_message ('ERROR: please specified a printing level (does nothing anyway :S )')
        read(Line(LinPos(2):LinEnd(2)),*,err=10) iPrnt
     end if
-    write(luo0,'(a,i1)')'... Printing level = ',iPrnt
+    write(luo0,'(a,i1)')'... Printing level (means nothing but looks cool ;-) )= ',iPrnt
 !
 !_________________ if perform statistics
     do_statistics = .false.
@@ -385,7 +400,7 @@ module param
 
   end subroutine compute_rates
     
-  subroutine write_data_in_log ()
+  subroutine write_rates_in_log ()
 
       ! rat(8)=depos_rate   ;    elem_barrier(8)=0.0d0
       write(luo0,'(/a)')'============|  Barriers (in Ev), Rates (in ps^-1) and Prefactors |============'
@@ -414,7 +429,6 @@ module param
   end subroutine 
 
   subroutine write_debug ()
-      !write(luo99,*) time, rat(1), rat(2), distance,alpha
       write(luo99,*) time, rat(1), rat(2), distance,alpha
   end subroutine 
 
