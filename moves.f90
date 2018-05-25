@@ -12,22 +12,62 @@ subroutine all_moves()
   m=0
 
   if (kind_of_PES == 0 ) then 
-      ! Move to the right
-      call fill_in (m,1,1,elem_barrier(1),rat(1),'diffus')
-      ! Move to the left
-      call fill_in (m,1,-1,elem_barrier(2),rat(2),'diffus')
-  else !> if kind_of_PES == 1
-      if (current_state == 1) then 
+      if (fences) then 
+          ! Move to the right
+          if (distance >= fence_position) then 
+              call fill_in (m,1,1,elem_barrier(1),0.0d8,'diffus')
+          else
+              call fill_in (m,1,1,elem_barrier(1),rat(1),'diffus')
+          end if
+          ! Move to the left
+          if (distance <= -fence_position) then 
+              call fill_in (m,1,-1,elem_barrier(2),0.0d8,'diffus')
+          else
+              call fill_in (m,1,-1,elem_barrier(2),rat(2),'diffus')
+          end if
+      else !> No fence
           ! Move to the right
           call fill_in (m,1,1,elem_barrier(1),rat(1),'diffus')
           ! Move to the left
           call fill_in (m,1,-1,elem_barrier(2),rat(2),'diffus')
-      else if (current_state == 2) then 
-          ! Move to the right
-          call fill_in (m,2,1,elem_barrier(3),rat(3),'diffus')
-          ! Move to the left
-          call fill_in (m,2,-1,elem_barrier(4),rat(4),'diffus')
       end if
+  else !> if kind_of_PES == 1
+      ! Compute the rates whith fences
+      if (fences) then 
+          if (current_state == 1) then 
+              ! Move to the right
+              !   If is next to the right fence --> rate to the right will be 0
+              if (distance >= fence_position) then 
+                  call fill_in (m,1,1,elem_barrier(1),0.0d8,'diffus')
+              else
+                  call fill_in (m,1,1,elem_barrier(1),rat(1),'diffus')
+              end if
+              ! Move to the left
+              !   If is next to the left fence --> rate to the left will be 0
+              if (distance <= -fence_position) then 
+                  call fill_in (m,1,-1,elem_barrier(2),0.0d8,'diffus')
+              else
+                  call fill_in (m,1,-1,elem_barrier(2),rat(2),'diffus')
+              end if
+          else if (current_state == 2) then 
+              ! Move to the right
+              call fill_in (m,2,1,elem_barrier(3),rat(3),'diffus')
+              ! Move to the left
+              call fill_in (m,2,-1,elem_barrier(4),rat(4),'diffus')
+          end if
+      else !> No fences (move up to infinity)
+          if (current_state == 1) then 
+              ! Move to the right
+              call fill_in (m,1,1,elem_barrier(1),rat(1),'diffus')
+              ! Move to the left
+              call fill_in (m,1,-1,elem_barrier(2),rat(2),'diffus')
+          else if (current_state == 2) then 
+              ! Move to the right
+              call fill_in (m,2,1,elem_barrier(3),rat(3),'diffus')
+              ! Move to the left
+              call fill_in (m,2,-1,elem_barrier(4),rat(4),'diffus')
+          end if
+      end if !> End if (fences)
   end if
 
   sum_rates=0.0

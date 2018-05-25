@@ -49,6 +49,10 @@ pulse_amplitud 0.070 # in eV
 pulse_omega 1000   # in Hz
 pulse_width 0.85    # in ?
 
+# Fences parameters
+fences .true.
+fence_position 100
+
 number_of_kmc_steps 5000000
 time_interval 0.001
 freq_writing 1000

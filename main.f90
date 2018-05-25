@@ -24,8 +24,8 @@ program KMC_1D
         call perform_move(m,kmc)
         ! Update time
         call update_time()
-        ! Update field if oscilatory
-        if (oscilatory_field .or. pulse_on) call update_field()
+        ! Update rates if there is a field 
+        if (oscilatory_field .or. pulse_on) call update_rates()
         ! Write the evolution in a file
         call write_evolution()
 
@@ -34,6 +34,79 @@ program KMC_1D
     call finish()
     write (*,*) "KMC finish!"
 end program
+
+subroutine update_time()
+    use param
+    implicit none
+    ! real*8, intent(inout) :: time
+    time = time + dt 
+end subroutine
+
+subroutine update_rates()
+    use param
+    implicit none
+
+    ! Set alpha to the original (initial) alpha
+    alpha=alpha_0
+
+    ! If is oscillatory, compute the field(t)
+    if (oscilatory_field) then 
+        ! Sinusoidal field
+        if ( field_shape  == 1 ) then
+            alpha = alpha_0*cos( 2*pi*freq_field*1.0d-12*time ) + displ_factor
+            !alpha = alpha_0*sin( 2*pi*freq_field*1.0d-12*time ) 
+        ! Square field
+        else if ( field_shape  == 2 ) then 
+            alpha = sign(alpha_0, cos( 2*pi*freq_field*1.0d-12*time )+assym_factor ) + displ_factor
+        end if
+    end if
+
+    ! Add pulse if requested
+    ! TODO: Rethink how to implement the pulse. For the time being, better not
+    ! to use it.
+    if (pulse_on) then 
+        ! Generate sinusoidal wave with the pulse frequency
+        pulse_wave = cos( 2*pi*pulse_omega*1.0d-12*time ) 
+        ! Pulse_width is a threshold when the pulse wave is bigger than that the
+        ! pulse gets active
+        if (pulse_wave > pulse_width) then 
+          pulse = pulse_amplitud
+        else 
+          pulse = 0
+        end if
+        alpha = alpha + pulse
+    end if
+
+    call compute_rates ()
+
+    ! ! KKK
+    !  if ( kmc/freq_writing * freq_writing == kmc ) call write_debug ()
+
+end subroutine
+
+subroutine write_evolution ()
+    use param
+    implicit none
+    integer :: counter=1
+
+!     writing_state = writing_state + 1
+!     if ( writing_state >= freq_writing ) then
+!         write (luo,'(f24.5,i8,i14)'),time*1d-9,distance,kmc
+!         writing_state = 0
+!     end if
+     if ( kmc/freq_writing * freq_writing == kmc ) then
+         write (luo,'(f24.5,i10,i14, f10.5)'),time*1d-9,distance,kmc, alpha
+         !call write_debug ()
+     end if
+     if (time_interval .gt. 0 ) then
+         if ( time .gt. next_time ) then
+             write (luo2,'(f14.4,i8,i14)'),time*1d-9,distance,kmc
+             next_time = counter*time_interval
+             counter = counter+1
+         end if
+     end if
+
+end subroutine write_evolution 
 
 subroutine init_kmc()
     use param
@@ -109,74 +182,6 @@ subroutine init_kmc()
     if ( time_interval .gt. 0 ) write (luo2,'(a)'), "#            time(ms)      distance     kmc-step    Alpha"
 
 end subroutine init_kmc
-
-subroutine update_time()
-    use param
-    implicit none
-    ! real*8, intent(inout) :: time
-    time = time + dt 
-end subroutine
-
-subroutine update_field()
-    use param
-    implicit none
-
-    alpha=0
-    if (oscilatory_field) then 
-        ! Sinusoidal field
-        if ( field_shape  == 1 ) then
-            alpha = alpha_0*cos( 2*pi*freq_field*1.0d-12*time ) + displ_factor
-            !alpha = alpha_0*sin( 2*pi*freq_field*1.0d-12*time ) 
-        ! Square field
-        else if ( field_shape  == 2 ) then 
-            alpha = sign(alpha_0, cos( 2*pi*freq_field*1.0d-12*time )+assym_factor ) + displ_factor
-        end if
-    end if
-
-    ! Add pulse if requested
-    if (pulse_on) then 
-        ! Generate sinusoidal wave with the pulse frequency
-        pulse_wave = cos( 2*pi*pulse_omega*1.0d-12*time ) 
-        ! Pulse_width is a threshold when the pulse wave is bigger than that the
-        ! pulse gets active
-        if (pulse_wave > pulse_width) then 
-          pulse = pulse_amplitud
-        else 
-          pulse = 0
-        end if
-        alpha = alpha + pulse
-    end if
-
-    call compute_rates ()
-
-    ! ! KKK
-    !  if ( kmc/freq_writing * freq_writing == kmc ) call write_debug ()
-
-end subroutine
-
-subroutine write_evolution ()
-    use param
-    implicit none
-    integer :: counter=1
-
-!     writing_state = writing_state + 1
-!     if ( writing_state >= freq_writing ) then
-!         write (luo,'(f24.5,i8,i14)'),time*1d-9,distance,kmc
-!         writing_state = 0
-!     end if
-     if ( kmc/freq_writing * freq_writing == kmc ) then
-         write (luo,'(f24.5,i10,i14, f10.5)'),time*1d-9,distance,kmc, alpha
-         !call write_debug ()
-     end if
-     if (time_interval .gt. 0 ) then
-         if ( time .gt. next_time ) then
-             write (luo2,'(f14.4,i8,i14)'),time*1d-9,distance,kmc
-             next_time = counter*time_interval
-             counter = counter+1
-         end if
-     end if
-
-end subroutine write_evolution 
 
 subroutine finish()
     use param

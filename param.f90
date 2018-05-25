@@ -53,7 +53,7 @@ module param
 !... E field parameters
     logical :: oscilatory_field=.false. !> If true -> <Direction> changes every <freq_field>
     integer :: field_shape=1 !> Shape of the external field (1:sinusoidal|2:square)
-    real*8  :: alpha=0, alpha_0  !> field factors alpha=alpha_0*sin(omega*t)
+    real*8  :: alpha=0, alpha_0=0  !> field factors alpha=alpha_0*sin(omega*t)
     real*8  :: assym_factor=0.0 !> Assymetry of the square wave of the E field
     real*8  :: displ_factor=0.0 !> Displacement of the  waves (sinusoidal or sqaure)
     real*8  :: freq_field=10000.0 !> Field's frequency omega (Hz?)
@@ -65,6 +65,10 @@ module param
     real*8  :: pulse_amplitud=0.0
     real*8  :: pulse_omega=0.0
     real*8  :: pulse_width=0.0
+
+!... Spacial parameters
+    logical :: fences=.false. !> If true -> Adds fences
+    integer :: fence_position=1000 !> Maximum distance molecule can move away the center
 
     real*8,parameter :: Boltzm = 8.617343e-5  ! in eV/K
     real*8,parameter :: pi = 3.1415926535897931
@@ -206,7 +210,8 @@ module param
         write(luo0,'(a,L3)')'... Assymetry factor  = ', assym_factor
         write(luo0,'(a,L3)')'... Displacing factor  = ', displ_factor
     else if (oscilatory_field .and. field_shape == 1 ) then 
-        write(luo0,'(a)')'... alpha(w,t) = alpha_0 *sin(omega*t)'
+        write(luo0,'(a)')'... alpha(w,t) = alpha_0 *sin(omega*t) + disp_factor'
+        write(luo0,'(a,L3)')'... Displacing factor  = ', displ_factor
     end if
 
 !_________________ Frequency of the oscilatory field 
@@ -253,6 +258,23 @@ module param
        write(luo0,'(a,L3)')'... Pulse width = ', pulse_width
      end if
 
+!
+!_________________ Spatial parameters 
+!
+    call find_string('fences',6,Line,1,.true.,iErr)
+    if(iErr.eq.0) then
+       call CutStr(Line,NumLin,LinPos,LinEnd,0,0,iErr)
+       if(NumLin.lt.2) call error_message ('ERROR: please write fences .true. or .false.')
+       read(Line(LinPos(2):LinEnd(2)),*,err=10) fences
+       write(luo0,'(a)')'... Fences = ', fences 
+    end if
+    call find_string('fence_position',14,Line,1,.true.,iErr)
+    if(iErr.eq.0) then
+       call CutStr(Line,NumLin,LinPos,LinEnd,0,0,iErr)
+       if(NumLin.lt.2) call error_message ('ERROR: please write fence_position <position.integer>')
+       read(Line(LinPos(2):LinEnd(2)),*,err=10) fence_position
+       write(luo0,'(a)')'... Fences positions = + and -  ', fence_position 
+    end if
 ! !
 ! !________ prefix to the rate, i.e. the exp prefactor to the rate:
 ! !         - in inverse ps (1 ps=10^{-12} s)
@@ -378,6 +400,7 @@ module param
       implicit none
       integer :: i
       
+      ! Single Peak PES
       if (kind_of_PES == 0) then
           do i=1,2
              pref= +1.0 * log(prefactors(i))
@@ -387,6 +410,7 @@ module param
                  rat(i)=exp(-beta*(elem_barrier(i)-alpha/2)+pref)
              end if
           end do
+      ! Two Peak PES
       else 
           do i=1,4
              pref= +1.0 * log(prefactors(i))
