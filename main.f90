@@ -184,4 +184,3 @@ subroutine finish()
     close (luo)
     close (luo2)
 end subroutine finish
-! test
